@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-
-import propiedades.Cadenas;
 import propiedades.Conf;
 import propiedades.Idioma;
 
@@ -54,7 +52,7 @@ public class MarcoPrincipal extends JFrame {
 		
 		
 		/* Inserto zona base */
-		zonaBase base = new zonaBase();
+		ZonaBase base = new ZonaBase(lang);
 		add(base);
 	}
 }

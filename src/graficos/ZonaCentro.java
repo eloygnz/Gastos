@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import propiedades.Conf;
 
-public class zonaCentro extends JPanel{
+public class ZonaCentro extends JPanel{
 	private static final long serialVersionUID = 1L;
 	// Obtengo datos del archivo de configuracion
 	Conf conf = new Conf();
@@ -17,7 +17,7 @@ public class zonaCentro extends JPanel{
 	int dias;
 	
 	
-	public zonaCentro(GregorianCalendar fecha) {
+	public ZonaCentro(GregorianCalendar fecha) {
 		/*  PRUEBA */
 		//fecha.set(Calendar.YEAR , 2024);  	// es bisiesto
 		//fecha.set(Calendar.MONTH , 1); 

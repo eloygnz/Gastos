@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class Conf extends Properties {
 
+	private static final long serialVersionUID = 1L;
 	String archivo = "resources/conf.properties";
 	
 	public Conf(){
