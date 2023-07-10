@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import propiedades.Cadenas;
+import propiedades.Conf;
 import propiedades.Idioma;
 
 public class MarcoPrincipal extends JFrame {
@@ -18,18 +20,19 @@ public class MarcoPrincipal extends JFrame {
 	// Para tamaño de pantalla
 	int altoPantalla = 0;
 	int anchoPantalla = 0;
+	Conf config = new Conf();
 	
 	// ********* FIN VARIABLES  *********//
 	
 	//public MarcoPrincipal(Cadenas cadenas){
-	public MarcoPrincipal(){
+	public MarcoPrincipal(Idioma lang){
 		// Obtengo datos de resolucion de pantalla
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		altoPantalla  = screenSize.height;
 		anchoPantalla = screenSize.width;
-		Idioma id=new Idioma("es");
+		
 		//*************** Configuro marco para pantalla principal ***************//	
-		setTitle(id.getProperty("titulo"));
+		setTitle(lang.getProperty("titulo"));
 		setSize(anchoPantalla, altoPantalla);
 		
 		
@@ -37,16 +40,15 @@ public class MarcoPrincipal extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);	
 		
 		
-		/* Para botones redondos */
+		/* Cambio aspecto de botones */
 		try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if (config.getProperty("btn_aspect").equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
-                    break;
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+        	JOptionPane.showMessageDialog(null,"Error configurando aspecto de ventana"); 
         }
 		setDefaultLookAndFeelDecorated(true);
 		

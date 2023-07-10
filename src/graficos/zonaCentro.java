@@ -19,9 +19,7 @@ public class zonaCentro extends JPanel{
 	
 	public zonaCentro(GregorianCalendar fecha) {
 		/*  PRUEBA */
-		// año, mes, dia
-		//fecha.set(2024, 1,1);	
-		//fecha.set(Calendar.YEAR , 2023);  	
+		//fecha.set(Calendar.YEAR , 2024);  	// es bisiesto
 		//fecha.set(Calendar.MONTH , 1); 
 		/*         */
 		
@@ -29,8 +27,8 @@ public class zonaCentro extends JPanel{
 		setLayout(new GridLayout(0, diasPorFila,hgap,vgap));
 		// Calculo maximo de dias de el mes
 		dias = maximoDias(fecha);
-		// Calculo de la semana del dia 1 del mes para saltar los huecos
-		// que corresponda
+		// Calculo de la semana del dia 1 del mes para saltar 
+		// los huecos que corresponda
 		Calendar dia_1 = fecha;
 		dia_1.set(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH),1);
 		int saltos = calculaSaltos(dia_1);
@@ -80,6 +78,15 @@ public class zonaCentro extends JPanel{
 		int resultado = 31;
 		int mesActual = actual.get(Calendar.MONTH)+1;
 		
+		if (mesActual == 2 && actual.isLeapYear(actual.get(Calendar.YEAR))) {
+			// Es febrero y año bisiesto
+			resultado = 29;
+		}else {
+			// Si es febrero no entra en switch
+			resultado = 28;
+		}
+		
+		// Cambia resultado si no es febrero
 		switch(mesActual){
         case 1:
         case 3:
@@ -95,13 +102,6 @@ public class zonaCentro extends JPanel{
         case 9:
         case 11:
             resultado=30;
-            break;
-        case 2:
-        	if (actual.isLeapYear(actual.get(Calendar.YEAR))) {
-        		resultado=29;
-        	}else{
-        		resultado=28;
-        	}
             break;
 		}
 		return resultado;
