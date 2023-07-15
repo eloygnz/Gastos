@@ -15,7 +15,7 @@ public class ZonaBase extends JPanel{
 	public ZonaBase(Idioma lang) {
 		setLayout(new BorderLayout());
 		GregorianCalendar fechaActual = new GregorianCalendar();
-		ZonaCentro centro = new ZonaCentro(fechaActual);
+		ZonaCentro centro = new ZonaCentro(fechaActual, lang);
 		ZonaAlta cabecera = new ZonaAlta(fechaActual, lang);
 		add(centro, BorderLayout.CENTER);
 		add(cabecera, BorderLayout.NORTH);

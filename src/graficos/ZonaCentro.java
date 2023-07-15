@@ -4,34 +4,50 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import control.Semana;
 import propiedades.Conf;
+import propiedades.Idioma;
 
 public class ZonaCentro extends JPanel{
 	private static final long serialVersionUID = 1L;
 	// Obtengo datos del archivo de configuracion
-	Conf conf = new Conf();
-	int diasPorFila = Integer.parseInt(conf.getProperty("dias_fila"));
-	int hgap = Integer.parseInt(conf.getProperty("hgap"));	
-	int vgap = Integer.parseInt(conf.getProperty("vgap"));
-	int dias;
+	private Conf conf = new Conf();
+	private int diasPorFila = Integer.parseInt(conf.getProperty("dias_fila"));
+	private int hgap = Integer.parseInt(conf.getProperty("hgap"));	
+	private int vgap = Integer.parseInt(conf.getProperty("vgap"));
+	private int dias;
 	
 	
-	public ZonaCentro(GregorianCalendar fecha) {
+	public ZonaCentro(GregorianCalendar fecha, Idioma lang) {
 		/*  PRUEBA */
 		//fecha.set(Calendar.YEAR , 2024);  	// es bisiesto
-		//fecha.set(Calendar.MONTH , 1); 
+	    //fecha.set(Calendar.MONTH , 1); 
 		/*         */
 		
 		// Configuro layout
 		setLayout(new GridLayout(0, diasPorFila,hgap,vgap));
-		// Calculo maximo de dias de el mes
+		// Calculo maximo de dias del mes
 		dias = maximoDias(fecha);
 		// Calculo de la semana del dia 1 del mes para saltar 
 		// los huecos que corresponda
 		Calendar dia_1 = fecha;
 		dia_1.set(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH),1);
 		int saltos = calculaSaltos(dia_1);
+		
+		
+		// Inserto dias de la semana
+		String[] diasSemana = new Semana(lang).getDias();
+		for (String string : diasSemana) {
+			JLabel nueva = new JLabel(string, SwingConstants.CENTER);
+			nueva.setFont(new Font(conf.getProperty("fuente_dias_semana"), 
+					Font.PLAIN, 
+					Integer.parseInt(conf.getProperty("tam_fuente_dias_semana"))));
+			add(nueva);
+		}
 		
 		// Inserto huecos
 		for (int i = 0; i<saltos;i++){
